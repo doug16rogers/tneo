@@ -344,7 +344,7 @@ in:
          && (holder->task_wait_reason != TN_WAIT_REASON_MUTEX_C)
       )
    {
-      _TN_FATAL_ERROR();
+      _TN_FATAL_ERROR("deadlock 1!");
    }
 
    struct TN_Mutex *mutex2 = _get_mutex_by_wait_queque(holder->pwait_queue);
@@ -464,7 +464,7 @@ static void _cry_deadlock_inactive(struct TN_Mutex *mutex, struct TN_Task *task)
       if (_tn_list_is_empty(&task->deadlock_list)){
          //-- should never be here: deadlock lists for tasks and mutexes
          //   should either be both non-empty or both empty
-         _TN_FATAL_ERROR();
+         _TN_FATAL_ERROR("deadlock 2!");
       }
 
       //-- cry that deadlock becomes inactive
@@ -794,7 +794,7 @@ enum TN_RCode tn_mutex_lock(struct TN_Mutex *mutex, TN_TickCnt timeout)
 
 #if TN_DEBUG
       if (!_tn_need_context_switch() && waited_for_mutex){
-         _TN_FATAL_ERROR("");
+         _TN_FATAL_ERROR("context switch and waiting");
       }
 #endif
 
@@ -849,7 +849,7 @@ enum TN_RCode tn_mutex_unlock(struct TN_Mutex *mutex)
          } else if (mutex->cnt < 0){
             //-- should never be here: lock count is negative.
             //   Bug in the kernel, or memory got corrupted.
-            _TN_FATAL_ERROR();
+            _TN_FATAL_ERROR("mutex->cnt < 0!");
          } else {
             //-- lock counter is 0, so, unlock mutex
             _mutex_do_unlock(mutex);

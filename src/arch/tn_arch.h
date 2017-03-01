@@ -97,6 +97,8 @@
 #  include "pic24_dspic/tn_arch_pic24.h"
 #elif defined(__TN_ARCH_CORTEX_M__)
 #  include "cortex_m/tn_arch_cortex_m.h"
+#elif defined(__TN_ARCH_UNIX)
+#  include "unix/tn_arch_unix.h"
 #else
 #  error "unknown platform"
 #endif

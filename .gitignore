@@ -38,6 +38,7 @@ tneo_cortex_m_iar/settings
 *.ewd
 
 *.tmp
+*~
 
 Makefile.deps
 

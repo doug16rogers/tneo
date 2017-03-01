@@ -172,6 +172,8 @@ _TN_STATIC_INLINE void _tn_timer_callback_call(
       TN_UWord          TN_INTSAVE_VAR
       )
 {
+   (void) TN_INTSAVE_VAR;
+
    //-- we're going to enable interrupt before calling callback, so,
    //   remember user data before enabling them, since the structure
    //   might be changed by interrupt

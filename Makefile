@@ -151,6 +151,32 @@ ifeq ($(TN_ARCH), $(filter $(TN_ARCH), pic24_dspic_noeds pic24_dspic_eds))
    endif
 endif
 
+
+
+#---------------------------------------------------------------------------
+# Run TNeo on a Unix platform.
+#---------------------------------------------------------------------------
+
+ifeq ($(TN_ARCH), $(filter $(TN_ARCH), unix))
+   TN_ARCH_DIR = $(TN_ARCH)
+
+   ifeq ($(TN_COMPILER),)
+
+      TN_COMPILER = gcc
+
+   endif
+
+   CC = $(TN_COMPILER)
+   AR = ar
+   CFLAGS = $(CFLAGS_COMMON) -D__TN_ARCH_UNIX
+   ASFLAGS =
+   TN_COMPILER_VERSION_CMD := $(CC) --version
+   BINARY_CMD = $(AR) -r $(BINARY) $(OBJS)
+
+endif
+
+
+
 ERR_MSG_STD = See comments in the Makefile-single for usage notes
 
 

@@ -212,6 +212,9 @@
 #     else
 #        error unknown ARM architecture for GCC compiler
 #     endif
+#  elif defined(__TN_ARCH_UNIX)
+      /* All is good. We're in well-charted territory. */
+      /* @todo Perhaps break out different platforms? */
 #  else
 #     error unknown architecture for GCC compiler
 #  endif
